@@ -2,12 +2,14 @@
 
 /* ALBUMS (SINGULAR) CONTROLLER */
 
-juke.controller('AlbumCtrl', function ($scope, $log, PlayerFactory, AlbumFactory) {
+juke.controller('AlbumCtrl', function ($scope, $log, PlayerFactory, AlbumFactory, $stateParams) {
 
+  $scope.albumId = $stateParams.albumId;
+  console.log($scope.albumId);
   // $scope.$on('viewSwap', function (event, data) {
     // if (data.name !== 'oneAlbum') return $scope.showMe = false;
     // $scope.showMe = true;
-    AlbumFactory.fetchById(data.id)
+    AlbumFactory.fetchById($scope.albumId)
     .then(album => {
       $scope.album = album;
       })
