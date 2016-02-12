@@ -38,7 +38,7 @@ juke.controller('AlbumCtrl', function ($scope, $log, PlayerFactory, AlbumFactory
 
 /* ALBUMS (PLURAL) CONTROLLER */
 
-juke.controller('AlbumsCtrl', function ($scope, $log, PlayerFactory, AlbumFactory) {
+juke.controller('AlbumsCtrl', function ($scope, $log, PlayerFactory, albums) {
 
   $scope.showMe = true;
 
@@ -50,10 +50,8 @@ juke.controller('AlbumsCtrl', function ($scope, $log, PlayerFactory, AlbumFactor
   //   $rootScope.$broadcast('viewSwap', { name: 'oneAlbum', id: album._id });
   // };
 
-  AlbumFactory.fetchAll()
-  .then(albums => {
+
     $scope.albums = albums;
-  })
-  .catch($log.error); // $log service can be turned on and off; also, pre-bound
+ // $log service can be turned on and off; also, pre-bound
 
 });

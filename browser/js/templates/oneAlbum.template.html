@@ -1,6 +1,11 @@
 <div class="album">
   <p>
-    <h3>{{ album.name }}</h3>
+    <h3>{{ album.name }}
+         <a href="mailto:">
+         <!-- ?subject=cool+album&body=tobealbumlink"  -->
+        <span class="glyphicon glyphicon-envelope"></span>
+     </h3>
+     <!-- class="glyphicon glyphicon-envelope"> </h3> -->
     <img ng-src="{{ album.imageUrl }}" class="img-thumbnail">
   </p>
   <table class='table'>
