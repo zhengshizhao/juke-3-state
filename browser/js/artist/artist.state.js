@@ -1,7 +1,6 @@
 'use strict';
 
 juke.config(function($stateProvider,$urlRouterProvider,$locationProvider) {
-	$urlRouterProvider.when('/artists/:artistId', '/artists/:artistId/albums')
 	$stateProvider
 	.state('artists', {
 		templateUrl: '/js/templates/allArtists.template.html',
@@ -33,6 +32,6 @@ juke.config(function($stateProvider,$urlRouterProvider,$locationProvider) {
 		url: '/songs'
 		//controller: 'ArtistCtrl'
 	})
-	$locationProvider.html5Mode(true);
+
 })
 
