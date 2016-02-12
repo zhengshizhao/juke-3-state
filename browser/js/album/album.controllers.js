@@ -1,22 +1,19 @@
 'use strict';
+/* ALBUMS (PLURAL) CONTROLLER */
+
+juke.controller('AlbumsCtrl', function ($scope, $log, PlayerFactory, albums) {
+
+  $scope.showMe = true;
+
+    $scope.albums = albums;
+
+});
 
 /* ALBUMS (SINGULAR) CONTROLLER */
 
+juke.controller('AlbumCtrl', function ($scope,PlayerFactory,album) {
 
-juke.controller('AlbumCtrl', function ($scope, $log, PlayerFactory, AlbumFactory, $stateParams) {
-
-  $scope.albumId = $stateParams.albumId;
-  console.log($scope.albumId);
-  // $scope.$on('viewSwap', function (event, data) {
-    // if (data.name !== 'oneAlbum') return $scope.showMe = false;
-    // $scope.showMe = true;
-    AlbumFactory.fetchById($scope.albumId)
-    .then(album => {
-      $scope.album = album;
-      })
-    .catch($log.error);
-
-
+  $scope.album = album;
   // main toggle
   $scope.toggle = function (song) {
     if (song !== PlayerFactory.getCurrentSong()) {
@@ -35,17 +32,5 @@ juke.controller('AlbumCtrl', function ($scope, $log, PlayerFactory, AlbumFactory
   $scope.isPlaying = function (song) {
     return PlayerFactory.isPlaying() && PlayerFactory.getCurrentSong() === song;
   };
-
 });
 
-/* ALBUMS (PLURAL) CONTROLLER */
-
-
-juke.controller('AlbumsCtrl', function ($scope, $log, PlayerFactory, albums) {
-
-  $scope.showMe = true;
-
-    $scope.albums = albums;
-
-
-});

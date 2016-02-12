@@ -1,29 +1,6 @@
 'use strict';
 
-juke.config(function($stateProvider, $urlRouterProvider, $locationProvider) {
-	$urlRouterProvider.when('/', '/albums');
-
-
-	$stateProvider.state('albums', {
-
-		templateUrl: '/js/templates/allAlbums.template.html',
-		url: '/albums',
-		resolve: {
-			albums: function(AlbumFactory){
-				return AlbumFactory.fetchAll()
-			}
-		},
-		controller: 'AlbumsCtrl'
-	})
-.state('album', {
-		templateUrl: '/js/templates/oneAlbum.template.html',
-		url: '/albums/:albumId',
-		controller: 'AlbumCtrl'
-	})
- $locationProvider.html5Mode(true);
-})
-
-juke.config(function($stateProvider,$urlRouterProvider) {
+juke.config(function($stateProvider,$urlRouterProvider,$locationProvider) {
 	$urlRouterProvider.when('/artists/:artistId', '/artists/:artistId/albums')
 	$stateProvider
 	.state('artists', {
@@ -31,10 +8,7 @@ juke.config(function($stateProvider,$urlRouterProvider) {
 		url: '/artists',
 		resolve: {
 			artists: function(ArtistFactory){
-				return ArtistFactory.fetchAll()
-				.catch(function(err){
-					console.log('err': err);
-				})
+				return ArtistFactory.fetchAll();
 			}
 		},
 		controller: 'ArtistsCtrl'
@@ -42,6 +16,11 @@ juke.config(function($stateProvider,$urlRouterProvider) {
 	.state('artist', {
 		templateUrl: '/js/templates/oneArtist.template.html',
 		url: '/artists/:artistId',
+		resolve: {
+			artist: function(ArtistFactory, $stateParams){
+				return ArtistFactory.fetchById($stateParams.artistId);
+			}
+		},
 		controller: 'ArtistCtrl'
 	})
 	.state('artist.albums', {
@@ -54,5 +33,6 @@ juke.config(function($stateProvider,$urlRouterProvider) {
 		url: '/songs'
 		//controller: 'ArtistCtrl'
 	})
+	$locationProvider.html5Mode(true);
 })
 
